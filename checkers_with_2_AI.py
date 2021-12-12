@@ -1,7 +1,7 @@
 import random
 from copy import deepcopy
 import copy
-
+ 
 class Shashki(): 
     def game_W(self, m):
         num_white_simple = 0
@@ -18,7 +18,7 @@ class Shashki():
                     num_black_simple += 1
                 if (m[i][j] == 'B'):
                     num_black_damki += 1
-        return num_white_simple - num_black_simple + (num_white_damki * 1.5 - num_black_damki * 1.5)
+        return num_white_simple - num_black_simple + (num_white_damki * 0.5 - num_black_damki * 0.5)
     def game_B(self, m):
         num_white_simple = 0
         num_black_simple = 0
@@ -34,8 +34,8 @@ class Shashki():
                     num_black_simple += 1
                 if (m[i][j] == 'B'):
                     num_black_damki += 1
-        return num_black_simple - num_white_simple + (num_black_damki * 1.5 - num_white_damki * 1.5)
-
+        return num_black_simple - num_white_simple + (num_black_damki * 0.5 - num_white_damki * 0.5)
+ 
     def recordingMoves(self, x1, y1, motion, x2, y2, f: str, i):
         f = open(f, 'a')
         f.write(str(i))
@@ -90,7 +90,7 @@ class Shashki():
             m[i] = list(f.readline().split()) 
         f.close() 
         return m 
-
+ 
     def getNextTurn(self, m, motion):
         chet = -1
         i = 0
@@ -118,7 +118,7 @@ class Shashki():
                             chet = 1
                             moves.append([chet, i, j, i + 2, j + 2])
                             #return chet, i, j, i + 2, j + 2
-
+ 
                     if( j != 6) and ( j != 7) and ( i != 0) and ( i != 1): # сверху
                         if(m[i][j] == 'B'): #дамка
                             k = 1
@@ -138,7 +138,7 @@ class Shashki():
                             chet = 1
                             moves.append([chet, i, j, i - 2, j + 2])
                             #return chet, i, j, i - 2, j + 2
-
+ 
             j = 1
             for i in range(8): # проверяем по диагонали слева есть ли фишка для того чтобы съесть
                 for j in range(8):
@@ -161,7 +161,7 @@ class Shashki():
                             chet = 1
                             moves.append([chet, i, j, i + 2, j - 2])
                             #return chet, i, j, i + 2, j - 2
-
+ 
                     if(j != 0) and (j != 1) and ( i != 0) and ( i != 1):#сверху
                         if(m[i][j] == 'B'):#дамка
                             k = 1
@@ -181,7 +181,7 @@ class Shashki():
                             chet = 1
                             moves.append([chet, i, j, i - 2, j - 2])
                             #return chet, i, j, i - 2, j - 2
-
+ 
             j = 0
             if(chet == -1):
                 for i in range(8): # проверяем по диагонали справа есть ли фишка
@@ -212,7 +212,7 @@ class Shashki():
                                     else:
                                         break
                                     k = k + 1
-
+ 
                 j = 1
                 for i in range(8): # проверяем по диагонали cлева есть ли фишка
                     for j in range(8):
@@ -265,7 +265,7 @@ class Shashki():
                             chet = 1
                             moves.append([chet, i, j, i + 2, j + 2])
                             #return chet, i, j, i + 2, j + 2
-
+ 
                     if( j != 6) and ( j != 7) and ( i != 0) and ( i != 1): # сверху
                         if(m[i][j] == 'W'): #дамка
                             k = 1
@@ -285,7 +285,7 @@ class Shashki():
                             chet = 1
                             moves.append([chet, i, j, i - 2, j + 2])
                             #return chet, i, j, i - 2, j + 2
-
+ 
             j = 1
             for i in range(8): # проверяем по диагонали слева есть ли фишка для того чтобы съесть
                 for j in range(8):
@@ -308,7 +308,7 @@ class Shashki():
                             chet = 1
                             moves.append([chet, i, j, i + 2, j - 2])
                             #return chet, i, j, i + 2, j - 2
-
+ 
                     if(j != 0) and (j != 1) and ( i != 0 ) and ( i != 1):
                         if(m[i][j] == 'W'):#дамка
                             k = 1
@@ -328,7 +328,7 @@ class Shashki():
                             chet = 1
                             moves.append([chet, i, j, i - 2, j - 2])
                             #return chet, i, j, i - 2, j - 2
-
+ 
             j = 0
             if(chet == -1):
                 for i in range(8): # проверяем по диагонали справа есть ли фишка
@@ -360,7 +360,7 @@ class Shashki():
                                         break
                                         #return chet, i, j, i + k, j + k
                                     k = k + 1
-
+ 
                 j = 1
                 for i in range(8): # проверяем по диагонали cлева есть ли фишка
                     for j in range(8):
@@ -397,7 +397,7 @@ class Shashki():
             moves.append([chet, i, j, i, j])
             return moves
         return moves
-
+ 
     def writeToFile(self, motion, m):
         #m[x1][y1], m[x2][y2] = m[x2][y2], m[x1][y1]
         #x1, y1 = x2, y2
@@ -426,7 +426,7 @@ class Shashki():
       #  self.motion = mot(self.f) 
        # self.m = readFromFile(self.f) 
         #self.chet, self.x1, self.y1, self.x2, self.y2 = x.getNextTurn() 
-
+ 
 class Piece():
     def minimax_W(self, position, depth, max_player, board):
         #print(depth, 'depth')
@@ -436,7 +436,7 @@ class Piece():
         if depth == 0 or x.exam(chet, x1, y1, x2, y2) == 1:
             #print(1)
             return x.game_W(board)
-
+ 
         if (max_player == 'w'):
             #print(2)
             maxEval = float('-inf')
@@ -492,7 +492,7 @@ class Piece():
         if depth == 0 or x.exam(chet, x1, y1, x2, y2) == 1:
             #print(1)
             return x.game_B(board)
-
+ 
         if (max_player == 'b'):
             #print(2)
             maxEval = float('-inf')
@@ -551,7 +551,7 @@ def get_all_moves(color, board, move, cl):
     board = simulate_move(move, board, cl)#белый походил, доска изменилась
     moves_tmp = x.getNextTurn(board, color)
     return moves_tmp
-
+ 
 i = 0
 proverka = 0
 while (proverka == 0):
@@ -586,8 +586,8 @@ while (proverka == 0):
     else:
         #print(motion, ' moves ', moves)
             max_player = 'b'
-            best_move = y.minimax_B(moves, 1, max_player, m_mnim)
-
+            best_move = y.minimax_B(moves, 2, max_player, m_mnim)
+ 
             if isinstance(best_move, float) == 0:
                chet, x1, y1, x2, y2 = best_move
             else:
@@ -604,6 +604,7 @@ while (proverka == 0):
     #     print('damki')
     # print(x1, y1, motion, x2, y2)
     x.writeToFile(motion, m)
+    print(1)
     #print(m)
 print('Проиграли', motion)
 k = 0
